@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+char retornaConceito(float nota);
+
 char retornaConceito(float nota){
 
   if(nota >= 9){

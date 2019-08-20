@@ -1,240 +1,243 @@
 #include <stdio.h>
 #include <string.h>
 
-void formataDia(int dia, char diaVetor[]){
+void formataDia(int dia, char diaString[]);
+void formataMes(int mes, char diaString[], char mesString[]);
+
+void formataDia(int dia, char diaString[]){
 
   switch(dia){
 
     case 1:
 
-      strcpy(diaVetor, "Um");
+      strcpy(diaString, "Um");
       break;
 
     case 2:
 
-      strcpy(diaVetor, "Dois");
+      strcpy(diaString, "Dois");
       break;
 
     case 3:
 
-      strcpy(diaVetor, "Três");
+      strcpy(diaString, "Três");
       break;
 
     case 4:
 
-      strcpy(diaVetor, "Quatro");
+      strcpy(diaString, "Quatro");
       break;
 
     case 5:
 
-      strcpy(diaVetor, "Cinco");
+      strcpy(diaString, "Cinco");
       break;
 
     case 6:
 
-      strcpy(diaVetor, "Seis");
+      strcpy(diaString, "Seis");
       break;
 
     case 7:
 
-      strcpy(diaVetor, "Sete");
+      strcpy(diaString, "Sete");
       break;
 
     case 8:
 
-      strcpy(diaVetor, "Oito");
+      strcpy(diaString, "Oito");
       break;
 
     case 9:
 
-      strcpy(diaVetor, "Nove");
+      strcpy(diaString, "Nove");
       break;
 
     case 10:
 
-      strcpy(diaVetor, "Dez");
+      strcpy(diaString, "Dez");
       break;
 
     case 11:
 
-      strcpy(diaVetor, "Onze");
+      strcpy(diaString, "Onze");
       break;
 
     case 12:
 
-      strcpy(diaVetor, "Doze");
+      strcpy(diaString, "Doze");
       break;
 
     case 13:
 
-      strcpy(diaVetor, "Treze");
+      strcpy(diaString, "Treze");
       break;
 
     case 14:
 
-      strcpy(diaVetor, "Quatorze");
+      strcpy(diaString, "Quatorze");
       break;
 
     case 15:
 
-      strcpy(diaVetor, "Quinze");
+      strcpy(diaString, "Quinze");
       break;
 
     case 16:
 
-      strcpy(diaVetor, "Dezesseis");
+      strcpy(diaString, "Dezesseis");
       break;
 
     case 17:
 
-      strcpy(diaVetor, "Dezessete");
+      strcpy(diaString, "Dezessete");
       break;
 
     case 18:
 
-      strcpy(diaVetor, "Dezoito");
+      strcpy(diaString, "Dezoito");
       break;
 
     case 19:
 
-      strcpy(diaVetor, "Dezenove");
+      strcpy(diaString, "Dezenove");
       break;
 
     case 20:
 
-      strcpy(diaVetor, "Vinte");
+      strcpy(diaString, "Vinte");
       break;
 
     case 21:
 
-      strcpy(diaVetor, "Vinte e Um");
+      strcpy(diaString, "Vinte e Um");
       break;
 
     case 22:
 
-      strcpy(diaVetor, "Vinte e Dois");
+      strcpy(diaString, "Vinte e Dois");
       break;
 
     case 23:
 
-      strcpy(diaVetor, "Vinte e Três");
+      strcpy(diaString, "Vinte e Três");
       break;
 
     case 24:
 
-      strcpy(diaVetor, "Vinte e Quatro");
+      strcpy(diaString, "Vinte e Quatro");
       break;
 
     case 25:
 
-      strcpy(diaVetor, "Vinte e Cinco");
+      strcpy(diaString, "Vinte e Cinco");
       break;
 
     case 26:
 
-      strcpy(diaVetor, "Vinte e Seis");
+      strcpy(diaString, "Vinte e Seis");
       break;
 
     case 27:
 
-      strcpy(diaVetor, "Vinte e Sete");
+      strcpy(diaString, "Vinte e Sete");
       break;
 
     case 28:
 
-      strcpy(diaVetor, "Vinte e Oito");
+      strcpy(diaString, "Vinte e Oito");
       break;
 
     case 29:
 
-      strcpy(diaVetor, "Vinte e Nove");
+      strcpy(diaString, "Vinte e Nove");
       break;
 
     case 30:
 
-      strcpy(diaVetor, "Trinta");
+      strcpy(diaString, "Trinta");
       break;
 
     case 31:
 
-      strcpy(diaVetor, "Trinta e Um");
+      strcpy(diaString, "Trinta e Um");
       break;
 
     default:
 
-      strcpy(diaVetor, "Erro");
+      strcpy(diaString, "Erro");
 
   }
 
 }
 
-void formataMes(int mes, char diaVetor[], char mesVetor[]){
+void formataMes(int mes, char diaString[], char mesString[]){
 
     switch(mes){
 
       case 1:
 
-        strcpy(mesVetor, "Janeiro");
+        strcpy(mesString, "Janeiro");
         break;
 
       case 2:
 
-        strcpy(mesVetor, "Fevereiro");
+        strcpy(mesString, "Fevereiro");
         break;
 
       case 3:
 
-        strcpy(mesVetor, "Março");
+        strcpy(mesString, "Março");
         break;
 
       case 4:
 
-        strcpy(mesVetor, "Abril");
+        strcpy(mesString, "Abril");
         break;
 
       case 5:
 
-        strcpy(mesVetor, "Maio");
+        strcpy(mesString, "Maio");
         break;
 
       case 6:
 
-        strcpy(mesVetor, "Junho");
+        strcpy(mesString, "Junho");
         break;
 
       case 7:
 
-        strcpy(mesVetor, "Julho");
+        strcpy(mesString, "Julho");
         break;
 
       case 8:
 
-        strcpy(mesVetor, "Agosto");
+        strcpy(mesString, "Agosto");
         break;
 
       case 9:
 
-        strcpy(mesVetor, "Setembro");
+        strcpy(mesString, "Setembro");
         break;
 
       case 10:
 
-        strcpy(mesVetor, "Outubro");
+        strcpy(mesString, "Outubro");
         break;
 
       case 11:
 
-        strcpy(mesVetor, "Novembro");
+        strcpy(mesString, "Novembro");
         break;
 
       case 12:
 
-        strcpy(mesVetor, "Dezembro");
+        strcpy(mesString, "Dezembro");
         break;
 
       default:
 
-        strcpy(mesVetor, "Erro");
+        strcpy(mesString, "Erro");
 
     }
 
@@ -245,13 +248,13 @@ int main(){
   int dia = 12;
   int mes = 8;
   int ano = 2019;
-  char diaVetor[12];
-  char mesVetor[10];
+  char diaString[12];
+  char mesString[10];
 
-  formataDia(dia, diaVetor);
-  formataMes(mes, diaVetor, mesVetor);
+  formataDia(dia, diaString);
+  formataMes(mes, diaString, mesString);
 
-  printf("%s de %s de %d\n", diaVetor, mesVetor, ano);
+  printf("%s de %s de %d\n", diaString, mesString, ano);
 
   return 0;
 
