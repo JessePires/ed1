@@ -28,4 +28,6 @@ int main(){
   printf("-2 ^ 2 = %.2f\n", potencia(-2, 2));
   printf("2 ^ -2 = %.2f\n", potencia(2, -2));
 
+  return 0;
+
 }
