@@ -23,10 +23,10 @@ void imprimeVetor(int *vetor, int tam){
 
 int main(){
 
-    int v[3] = {1,2,3};
-    int v1[4] = {1,2,3,4};
+    int v[] = {1,2,3};
+    int v1[] = {1,2,3,4};
     int v2 = 1;
-    int v3[10] = {1,2,3,4,5,6,7,8,9,10};
+    int v3[] = {1,2,3,4,5,6,7,8,9,10};
 
     imprimeVetor(v, 3);
     imprimeVetor(v1, 4);

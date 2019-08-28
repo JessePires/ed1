@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int* criaVetorConvencional(int tam, int valor);
-void criaVetorScanf(int tam, int valor, int** vetor);
+void criaVetorScanf(int tam, int valor, int **vetor);
 
 int* criaVetorConvencional(int tam, int valor){
 
