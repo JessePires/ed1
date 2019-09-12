@@ -3,6 +3,7 @@
 
 // DADOS
 typedef struct{
+    
     int **matriz;
     int linhas;
     int colunas;
