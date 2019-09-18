@@ -39,11 +39,14 @@ Boolean vetor_set(Vetor* v, int index, DataType valor);
 void vetor_map(Vetor* v, void (*funcao)(DataType*));
 Vetor* vetor_sub1(Vetor* v, int index);
 Vetor* vetor_sub2(Vetor* v, int start, int end);
+Vetor* vetor_filter(Vetor* v, Boolean (*funcao)(DataType*));
 int vetor_size(Vetor* v);
 Boolean vetor_isFull(Vetor* v);
 Boolean vetor_haveSpace(Vetor* v);
 void vetor_increase(Vetor* v);
 void vetor_decrease(Vetor* v);
+void vetor_sort(Vetor* v);
+void vetor_genericSort(Vetor* v, int (*pfuncao)(DataType* a, DataType* b));
 
 //OPERAÇÕES
 
@@ -389,6 +392,24 @@ Vetor* vetor_sub2(Vetor* v, int start, int end){
 
 }
 
+Vetor* vetor_filter(Vetor* v, Boolean (*funcao)(DataType*)){
+
+    Vetor* newVector = vetor_new();
+
+    for(int i = 0; i < v->size; i++){
+
+        if(funcao(&v->vetor[i])){
+
+            vetor_add(newVector, v->vetor[i]);
+
+        }
+
+    }
+
+    return newVector;
+
+}
+
 int vetor_size(Vetor* v){
 
     return v->size;
@@ -448,5 +469,66 @@ void vetor_decrease(Vetor* v){
     free(v->vetor);
     v->length -= 5;
     v->vetor = vector;
+
+}
+
+void vetor_sort(Vetor* v){
+
+    int i, end, temp;
+
+    for(end = v->size-1; end>0; end--) {
+    
+        int was_exchange = 0;
+    
+        for(i = 0; i < end; i++){
+
+            if(v->vetor[i] > v->vetor[i+1]){
+
+                temp = v->vetor[i];
+                v->vetor[i] = v->vetor[i+1];
+                v->vetor[i+1] = temp;
+                was_exchange = 1;
+            }
+
+        }
+
+        if (was_exchange == 0){
+
+            return;
+
+        }
+
+    }
+
+}
+
+void vetor_genericSort(Vetor* v, int (*pfuncao)(DataType* a, DataType* b)){
+
+    int i, end, temp;
+
+    for(end = v->size-1; end>0; end--) {
+    
+        int was_exchange = 0;
+    
+        for(i = 0; i < end; i++){
+
+            if(pfuncao(&v->vetor[i], &v->vetor[i+1]) >= 0){
+
+                temp = v->vetor[i];
+                v->vetor[i] = v->vetor[i+1];
+                v->vetor[i+1] = temp;
+                was_exchange = 1;
+            
+            }
+
+        }
+
+        if (was_exchange == 0){
+
+            return;
+
+        }
+
+    }
 
 }
