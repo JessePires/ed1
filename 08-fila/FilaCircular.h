@@ -22,15 +22,7 @@ typedef struct{
 Fila* fila_criar();
 Fila* fila_destruir(Fila* f);
 Boolean fila_inserir(Fila* f, Tipo elemento); //TENTAR IMPLEMENTAR OLHANDO SÓ PARA O INÍCIO E O FIM
-                                              //USAR MOD DE 5 PARA ATUALIZAR O FIM
-
-                                              //0%5 = 0     5%5 = 0
-                                              //1%5 = 1     6%5 = 1
-                                              //2%5 = 2     7%5 = 2
-                                              //3%5 = 3     8%5 = 3
-                                              //4%5 = 4     9%5 = 4
-                                              //            10%5 = 5  
-
+                                              //USAR MOD DE 5 PARA ATUALIZAR O FIM  
 Tipo* fila_remover1(Fila* f);
 Boolean fila_remover2(Fila* f, Tipo* endereco);
 Boolean fila_primeiro(Fila* f, Tipo* endereco);
@@ -44,7 +36,7 @@ void fila_imprimir(Fila* f);
 Fila* fila_criar(){
 
     Fila* f = (Fila*) malloc(sizeof(Fila));
-    f->tam = 0;
+    f->tam = 5;
     f->vetor = (Tipo*) calloc(5, sizeof(Tipo));
     f->inicio = 0;
     f->fim = 0;
@@ -61,21 +53,43 @@ Fila* fila_destruir(Fila* f){
 
 }
 
+//auxiliar de fila_inserir()
 void fila_garanteEspaco(Fila* f){
 
+    if(f->inicio != (f->fim + 1) % f->tam) return;
     
+    Tipo* v = (Tipo*) calloc(f->tam * 2, sizeof(Tipo));
+    for(int i = f->inicio; i < f->fim; i++){
+
+        printf("aqui\n");
+        v[i % f->tam] = f->vetor[i % f->tam];
+
+    }
+
+    f->vetor = v;
+    f->tam += 5;
 
 }
 
 Boolean fila_inserir(Fila* f, Tipo elemento){
 
+    fila_garanteEspaco(f);
 
+    if(f != NULL){
+        
+        f->vetor[f->fim] = elemento;
+        f->fim++;
+        return true;
+
+    }
+
+    return false;
 
 }
 
 Tipo* fila_remover1(Fila* f){
 
-    if(f->inicio == 0 && f->fim == 0){
+    if(f->inicio == f->fim){
 
         return NULL;
 
@@ -96,7 +110,7 @@ Boolean fila_remover2(Fila* f, Tipo* endereco){
 
     }
 
-    endereco = &f->vetor[f->inicio];
+    *endereco = f->vetor[f->inicio];
     f->inicio++;
     return true;
 
@@ -106,7 +120,7 @@ Boolean fila_primeiro(Fila* f, Tipo* endereco){
 
     if(f != NULL){
 
-        endereco = &f->vetor[f->inicio];
+        *endereco = f->vetor[f->inicio];
         return true;
 
     }
@@ -129,9 +143,9 @@ int fila_tamanho(Fila* f){
 
 Boolean fila_contem(Fila* f, Tipo elemento){
 
-    for(int i = 0; i < f->tam - 1; i++){
+    for(int i = f->inicio; i < f->fim; i++){
 
-        if(f->vetor[i] == elemento){
+        if(f->vetor[i % f->tam] == elemento){
 
             return true;
 
@@ -145,22 +159,19 @@ Boolean fila_contem(Fila* f, Tipo elemento){
 
 void fila_imprimir(Fila* f){
 
-    printf("Fila circular <f>: [");
-    for(int i = 0; i < f->tam; i++){
+    if(f != NULL){
 
-        printf("%d", f->vetor[i]);
-        
-        if(i == f->inicio){
+        printf("Fila circular <f>: [");
+        for(int i = f->inicio; i < f->fim; i++){
 
-            printf("(início");
-
-        }else if(i == f->fim){
-
-            printf("(fim)");
+            printf("%d", f->vetor[i % f->tam]);
+            printf("%s", (i < f->fim % f->tam - 1 ? ", " : "]\n"));
 
         }
-        
-        printf("%s", (i < f->tam - 1 ? ", " : "]\n"));
+
+    }else{
+
+        printf("Impossível imprimir a fila!\n");
 
     }
 
