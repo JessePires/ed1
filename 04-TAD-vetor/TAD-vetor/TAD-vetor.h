@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <string.h>
 
 //DADOS
 typedef struct{
@@ -17,6 +18,7 @@ typedef enum {false, true} Boolean;
 
 #define LENGTH 5
 #define OUT_OF_RANGE INT_MIN
+#define OPEN_FILE_ERROR INT_MAX
 
 
 //PROTÓTIPOS DAS FUNÇÕES
@@ -47,6 +49,9 @@ void vetor_increase(Vetor* v);
 void vetor_decrease(Vetor* v);
 void vetor_sort(Vetor* v);
 void vetor_genericSort(Vetor* v, int (*pfuncao)(DataType* a, DataType* b));
+int vetor_import(Vetor* v, char* nomeArquivo);
+int vetor_save(Vetor* v, char* nomeArquivo); //Retorno: qtd de bytes armazenados no arquivo
+Vetor* vetor_load(char* nomeArquivo); //Retorno: endereço do TAD Vetor criado e carregado na memória
 
 //OPERAÇÕES
 
@@ -532,3 +537,44 @@ void vetor_genericSort(Vetor* v, int (*pfuncao)(DataType* a, DataType* b)){
     }
 
 }
+
+int vetor_import(Vetor* v, char* nomeArquivo){
+
+    FILE *arq = fopen(nomeArquivo, "r");
+    char valorStr[11];
+    char elem;
+    int numero;
+    int qtdNumeros = 0;
+
+    if(arq == NULL){
+
+        return OPEN_FILE_ERROR;
+
+    }else{
+
+        while((elem = fgetc(arq)) != EOF){
+
+            if(strcmp(&elem, ",")){
+                
+                numero = atoi(valorStr);
+                vetor_add(v, numero);  
+                qtdNumeros++;
+
+            }else{
+
+                strcat(valorStr, &elem);
+
+            }
+
+        }
+
+    }
+
+    fclose(arq);
+    return qtdNumeros;
+
+}
+
+int vetor_save(Vetor* v, char* nomeArquivo){}
+
+Vetor* vetor_load(char* nomeArquivo){}

@@ -140,7 +140,12 @@ int main(){
     vetor_map(subV1, doubleValues);
     printf("Sub-vetor1 após a aplicação da função doubleValues(): ");
     vetor_print(subV1);
-    
+
+    //import function 
+    int qtdValores = vetor_import(v1, "valores.txt");
+    printf("Vetor após importação de valores do arquivo valores.txt: ");
+    vetor_print(v1);
+
     return 0;
 
 }

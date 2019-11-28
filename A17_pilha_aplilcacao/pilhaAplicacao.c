@@ -6,7 +6,7 @@ char verificaExpressao(char A[]){
     char pilha[strlen(A)];
     int cont = 0;
 
-    if(strlen(A) <= 1){
+    if(strlen(A) == 1){
 
         return 'N';
 
@@ -15,17 +15,14 @@ char verificaExpressao(char A[]){
         return 'N';
 
     }
-
+    
     for(int i = 0; i < strlen(A); i++){
 
-        switch(A[i]){
+        if(A[i] == '(' || A[i] == '[' || A[i] == '{'){
 
-            case '(':
-            case '[':
-            case '{':
-                strcpy(&pilha[cont], &A[i]);
-                cont++;
-                break;
+            strcpy(&pilha[cont], &A[i]);
+            cont++;
+
         }
 
         if(A[i] == ')' && pilha[cont -1] == '('){
@@ -55,14 +52,12 @@ char verificaExpressao(char A[]){
 int main(){
 
     int T;
-    char A[1000001];
+    char A[100001];
+    clock_t inicio, fim;
 
-    do{
+    scanf("%d", &T);
 
-        scanf("%d", &T);
-
-    }while(T < 1 || T > 20);
-
+    inicio = clock();
     for(int i = 0; i < T; i++){
 
         scanf("%s", A);

@@ -22,6 +22,7 @@ int main()
     // acessar valores das celulas
     // int x = m[1][2]
     int x1 = matriz_acessa1(m1, 0, 1);
+    printf("\n\n%d\n\n", x1);
 
     int x2;
     matriz_acessa2(m1, 0, 1, &x2);
