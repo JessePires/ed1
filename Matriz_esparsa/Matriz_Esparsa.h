@@ -41,6 +41,26 @@ typedef struct{
 Matriz* matriz_criar(int qtdeLinhas, int qtdeColunas);
 
 /*
+*Retorna o nó (referente a linha) desejado de acordo com a linha e coluna passadas por parâmetro.
+*/
+No* getNoLinha(Matriz* m, int linha, int coluna);
+
+/*
+*Retorna o nó (referente a coluna) desejado de acordo com a linha e coluna passadas por parâmetro.
+*/
+No* getNoColuna(Matriz* m, int linha, int coluna);
+
+/*
+*insere um nó na linha
+*/
+void insereNaLinha(No* ref, No* no);
+
+/*
+*insere um nó na coluna
+*/
+void insereNaColuna(No* ref, No* no);
+
+/*
 *Insere o <valor> na matriz na linha e coluna.
 *Caso a posição já exista, apenas substitui o valor.
 */
@@ -75,6 +95,7 @@ Matriz* matriz_criar(int qtdeLinhas, int qtdeColunas){
     m->numColunas = qtdeColunas;
     m->linhas = (No**) calloc(qtdeLinhas, sizeof(No*));
     
+    //INSERÇÃO DOS SENTINELAS NO VETOR REPONSÁVEL PELAS LINHAS
     for(int i = 0; i < m->numLinhas; i++){
 
         No* sentinela = (No*) malloc(sizeof(No));
@@ -86,6 +107,7 @@ Matriz* matriz_criar(int qtdeLinhas, int qtdeColunas){
     
     m->colunas = (No**) calloc(qtdeColunas, sizeof(No*));
 
+    //INSERÇÃO DOS SENTINELAS NO VETOR RESPONSÁVEL PELAS COLUNAS
     for(int i = 0; i < m->numColunas; i++){
 
         No* sentinela = (No*) malloc(sizeof(No));
@@ -99,22 +121,72 @@ Matriz* matriz_criar(int qtdeLinhas, int qtdeColunas){
 
 }
 
+No* getNoLinha(Matriz* m, int linha, int coluna){
+
+    No* aux = m->linhas[linha];
+    while(aux->coluna != coluna) aux = aux->direita;
+
+    return aux;
+
+}
+
+No* getNoColuna(Matriz* m, int linha, int coluna){
+
+    No* aux = m->colunas[coluna];
+    while(aux->linha != linha) aux = aux->baixo;
+
+    return aux;
+
+}
+
+void insereNaLinha(No* ref, No* no){
+
+    no->direita = ref;
+    no->esquerda = ref->esquerda;
+    ref->esquerda->direita = no;
+    ref->esquerda = no;
+
+}
+
+void insereNaColuna(No* ref, No* no){
+
+    no->baixo = ref;
+    no->cima = ref->cima;
+    ref->cima->baixo = no;
+    ref->cima = no;
+
+}
 
 Boolean matriz_atribuir(Matriz* m, int linha, int coluna, int valor){
 
     if(m != NULL){
 
-        if(linha >= 0 && linha < m->numLinhas){
+        if(linha < m->numLinhas){
 
-            if(coluna >= 0 && coluna < m->numColunas){
+            if(coluna < m->numColunas){
 
                 if(valor < INDEX_OUT_OF_RANGE){
-
-                    No* aux1 = m->linhas[linha];
                     
-                    if(aux1 != NULL){
+                    printf("entrou\n");
 
-                        
+                    No* auxLinha = getNoLinha(m, linha, coluna);
+
+                    if(auxLinha != NULL){
+
+                        printf("entrou2\n");
+
+                        auxLinha->valor = valor;
+
+                    }else{
+
+                        printf("entrou3\n");
+
+                        No* auxColuna = getNoColuna(m, linha, coluna);
+                        No* novoNo = (No*) malloc(sizeof(No));
+                        novoNo->valor = valor;
+                        insereNaLinha(auxLinha, novoNo);
+                        insereNaColuna(auxColuna, novoNo);
+
 
                     }
 
@@ -122,13 +194,9 @@ Boolean matriz_atribuir(Matriz* m, int linha, int coluna, int valor){
 
                 }
 
-
             }
 
-
         }
-
-
     }
 
     return false;
@@ -155,5 +223,31 @@ Boolean matriz_atribuir(Matriz* m, int linha, int coluna, int valor){
 // }
 
 
-// void matriz_imprimir(Matriz* m);
-// Matriz* matriz_desalocar(Matriz* m);
+void matriz_imprimir(Matriz* m){
+
+    for(int i = 0; i < m->numLinhas; i++){
+
+        No* aux = m->linhas[i]->direita;
+
+        for(int j = 0; j < m->numColunas; j++){
+
+            if(j != aux->coluna){
+
+                printf("0 ");
+
+            }else{
+
+                printf("%d ", aux->valor);
+
+            }
+
+            aux = aux->direita;
+            printf("\n");
+
+        }
+
+    }
+
+}
+
+// Matriz* matriz_desalocar(Matriz* m){}
